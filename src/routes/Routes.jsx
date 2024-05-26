@@ -3,6 +3,9 @@ import Main from "../Layout/Main";
 import Login from "../componant/Login";
 import Sign from "../componant/Sign";
 import Home from "../componant/Home/Home";
+import AddProduct from "../componant/Dashboard/AddProduct";
+import AllProducts from "../componant/Dashboard/AllProducts";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +23,20 @@ const router = createBrowserRouter([
       {
         path: "/sign_up",
         element: <Sign></Sign>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/add_product",
+       element: <AddProduct></AddProduct>
+      },
+      {
+        path: "/dashboard/All_products",
+        element: <AllProducts></AllProducts>
       },
     ],
   },

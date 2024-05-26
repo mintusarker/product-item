@@ -1,0 +1,50 @@
+import React from "react";
+import Navbar from "../shared/Navbar";
+import { Link, Outlet } from "react-router-dom";
+import Footer from "../shared/Footer";
+
+const Dashboard = () => {
+  return (
+        
+     <div>
+        <Navbar></Navbar>
+         <div className="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content flex flex-col items-center justify-center">
+
+        {/* outlet */}
+        <Outlet />
+
+        <label
+          htmlFor="my-drawer-2"
+          className="btn btn-primary drawer-button lg:hidden"
+        >
+          Open drawer
+        </label>
+      </div>
+      <div className="drawer-side">
+        <label
+          htmlFor="my-drawer-2"
+          aria-label="close sidebar"
+          className="drawer-overlay"
+        ></label>
+        <ul className="menu p-4 w-60 min-h-screen bg-slate-300 text-base-content flex flex-col justify-between">
+          {/* Sidebar content here */}
+          <div className="text-lg mt-14">
+            <li className="bg-sky-700 text-white">
+              <Link to={"/dashboard/All_products"}>Mangae All Products</Link>
+            </li>
+            <li className="bg-sky-700 text-white my-5">
+              <Link to={"/dashboard/add_product"}>Add Product</Link>
+            </li>
+          </div>
+        
+        </ul>
+      </div>
+    </div>
+    <Footer></Footer>
+     </div>
+  );
+};
+
+export default Dashboard;

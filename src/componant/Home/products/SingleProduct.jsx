@@ -11,6 +11,7 @@ const SingleProduct = ({product}) => {
           </figure>
           <div className="card-body">
             <h2 className="card-title">{product?.title}</h2>
+            <h2 className="text-lg text-green-600">Brand: {product?.brand}</h2>
             <p>Price:{product?.price}</p>
             <p>{product?.description.slice(0,100)}....</p>
             <div className="card-actions justify-end">
