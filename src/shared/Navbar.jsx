@@ -64,7 +64,7 @@ const Navbar = () => {
               {menuItems}
             </ul>
           </div>
-          <p className="font-semibold text-xl uppercase">Foods</p>
+          <p className="font-semibold text-xl uppercase">Fashion Corner</p>
         </div>
         <div className="navbar-center hidden md:flex lg:flex">
           <ul className="menu menu-horizontal px-1 font-semibold text-base capitalize">
@@ -72,7 +72,7 @@ const Navbar = () => {
           </ul>
         </div>
         <label
-          htmlFor="my-drawer-1"
+          htmlFor="my-drawer-2"
           tabIndex={0}
           className="btn btn-ghost lg:hidden"
         >

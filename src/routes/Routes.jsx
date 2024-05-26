@@ -6,6 +6,7 @@ import Home from "../componant/Home/Home";
 import AddProduct from "../componant/Dashboard/AddProduct";
 import AllProducts from "../componant/Dashboard/AllProducts";
 import Dashboard from "../Layout/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -28,15 +29,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/add_product",
-       element: <AddProduct></AddProduct>
+        element: <AddProduct></AddProduct>,
       },
       {
         path: "/dashboard/All_products",
-        element: <AllProducts></AllProducts>
+        element: <AllProducts></AllProducts>,
       },
     ],
   },

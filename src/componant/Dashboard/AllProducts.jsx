@@ -1,20 +1,42 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const AllProducts = () => {
-  const [items, setItems] = useState([]);
-  //   console.log(items);
+  //   const [items, setItems] = useState([]);
+  //   //   console.log(items);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/items`)
+  //   useEffect(() => {
+  //     fetch(`http://localhost:5000/items`)
+  //       .then((res) => res.json())
+  //       .then((data) => setItems(data));
+  //   }, []);
+  const { data: items = [], refetch } = useQuery({
+    queryKey: ["allBookings"],
+    queryFn: async () => {
+      const res = await fetch(`http://localhost:5000/items`);
+      const data = await res.json();
+      console.log(data);
+      return data;
+    },
+  });
+
+  const handleProductRemove = (id) => {
+    fetch(`http://localhost:5000/items/${id}`, {
+      method: "DELETE",
+    })
       .then((res) => res.json())
-      .then((data) => setItems(data));
-  }, []);
+      .then((data) => {
+        console.log(data);
+        toast.success("Product deleted");
+        refetch();
+      });
+  };
 
   return (
     <div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto my-12">
         <table className="table">
-         
           <thead>
             <tr className="text-red-800 text-lg">
               <th></th>
@@ -34,10 +56,7 @@ const AllProducts = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={item?.image_url}
-                          alt="shopping item"
-                        />
+                        <img src={item?.image_url} alt="shopping item" />
                       </div>
                     </div>
                     <div>
@@ -49,19 +68,21 @@ const AllProducts = () => {
                 <td>{item?.price} tk</td>
                 <td className="w-56"> {item?.description} tk</td>
                 <div>
-                <button  className="btn btn-sm m-4 btn-error">Edit</button>
-                <button  className="btn btn-sm m-4 btn-warning">Delete</button>
+                  <button className="btn btn-sm m-4 btn-error">Edit</button>
+                  <button
+                    onClick={() => handleProductRemove(item?._id)}
+                    className="btn btn-sm m-4 btn-warning"
+                  >
+                    Delete
+                  </button>
                 </div>
                 <th></th>
               </tr>
             ))}
           </tbody>
-         
         </table>
       </div>
     </div>
-
-   
   );
 };
 
