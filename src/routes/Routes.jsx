@@ -8,6 +8,8 @@ import AllProducts from "../componant/Dashboard/AllProducts";
 import Dashboard from "../Layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import UpdateProduct from "../componant/Dashboard/UpdateProduct";
+import Details from "../componant/Dashboard/Details";
+import DashboardHome from "../componant/Dashboard/DashboardHome";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard",
+        element: <DashboardHome></DashboardHome>,
+      },
+      {
         path: "/dashboard/add_product",
         element: <AddProduct></AddProduct>,
       },
@@ -47,7 +53,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/update/:id",
         element: <UpdateProduct></UpdateProduct>,
-        loader: ({ params }) => fetch(`http://localhost:5000/items/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/items/${params.id}`),
+      },
+      {
+        path: "/dashboard/detail/:id",
+        element: <Details></Details>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/items/${params.id}`),
       },
     ],
   },

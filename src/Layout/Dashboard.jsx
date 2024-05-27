@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../shared/Navbar";
 import { Link, Outlet } from "react-router-dom";
 import Footer from "../shared/Footer";
@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="drawer lg:drawer-open">
+      <div className="drawer md:drawer-open lg:drawer-open">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center">
           {/* outlet */}
@@ -19,7 +19,7 @@ const Dashboard = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu p-4 w-60 min-h-screen bg-slate-300 text-base-content flex flex-col justify-between">
+          <ul className="menu p-4 w-60 min-h-screen bg-slate-300 text-base-content flex flex-col">
             {/* Sidebar content here */}
             <div className="text-lg mt-14">
               <li className="bg-sky-700 text-white">

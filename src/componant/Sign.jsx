@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { GoogleAuthProvider } from "firebase/auth";
 import { AuthContext } from "../Auth/AuthProvider";
-// import { toast } from 'react-hot-toast';
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const {
@@ -13,6 +13,7 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const [error, setError] = useState("");
 
   const { createUser, googleLogin, updateUser } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const SignUp = () => {
         console.log(user);
         updateUserHandle(data);
         navigate('/')
-        // toast.success(`User create successfully`);
+        toast.success(`User create successfully`);
         reset();
       })
       .catch((err) => {
@@ -47,35 +48,17 @@ const SignUp = () => {
     .then((result) => {
         const user = result.user;
         console.log(user);
-        // saveUser(data.name, data.email);
       })
       .catch((err) => console.log(err));
   };
 
-//   const saveUser = (name, email) => {
-//     const user = { name, email };
-
-//     fetch("https://hello-doctors-server.vercel.app/users", {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
-//       },
-//       body: JSON.stringify(user),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         navigate('/')
-//         console.log(data);
-//         setUserEmail(email);
-//       });
-//   };
 
   const handleGoogleSignIn = () => {
     googleLogin(provider)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        // toast.success(`User create successfully`)
+        toast.success(`User login successfully`)
       })
       .catch((err) => {
         console.log(err.message);
@@ -159,7 +142,7 @@ const SignUp = () => {
             className="text-secondary border-b-2 ml-6 border-green-500"
           >
             Please Login
-          </Link>{" "}
+          </Link>
         </p>
         <div className="divider">OR</div>
         <button onClick={handleGoogleSignIn} className="btn btn-success w-full">

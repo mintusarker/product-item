@@ -13,7 +13,6 @@ const AllProducts = () => {
   //       .then((data) => setItems(data));
   //   }, []);
 
-
   const { data: items = [], refetch } = useQuery({
     queryKey: ["allBookings"],
     queryFn: async () => {
@@ -38,6 +37,9 @@ const AllProducts = () => {
 
   return (
     <div>
+      <h3 className="text-xl bg-slate-900 text-white text-center my-6">
+        Total Products : {items?.length}
+      </h3>
       <div className="overflow-x-auto my-12">
         <table className="table">
           <thead>
@@ -69,16 +71,27 @@ const AllProducts = () => {
                 </td>
                 <td>{item?.brand}</td>
                 <td>{item?.price} tk</td>
-                <td className="w-56"> {item?.description}</td>
-                <div>
-                <Link to={`/dashboard/update/${item?._id}`}><button className="btn btn-error btn-sm px-5">Edit</button></Link>
-                  <button
-                    onClick={() => handleProductRemove(item?._id)}
-                    className="btn btn-sm m-4 px-5 btn-warning"
-                  >
-                    Delete
-                  </button>
-                </div>
+                {/* <td className="w-56"> {item?.description}</td> */}
+                <td>
+                  <Link to={`/dashboard/detail/${item?._id}`}>
+                    <button className="btn btn-accent btn-sm">Detail</button>
+                  </Link>
+                </td>
+                <td>
+                  <div className="flex flex-wrap justify-center items-center">
+                    <Link to={`/dashboard/update/${item?._id}`}>
+                      <button className="btn btn-error btn-sm px-5">
+                        Edit
+                      </button>
+                    </Link>
+                    <button
+                      onClick={() => handleProductRemove(item?._id)}
+                      className="btn btn-sm m-4 px-5 btn-warning"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
                 <th></th>
               </tr>
             ))}

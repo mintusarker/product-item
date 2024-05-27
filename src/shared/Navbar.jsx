@@ -2,15 +2,14 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../Auth/AuthProvider";
 
-
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext)
+  const { user, logOut } = useContext(AuthContext);
 
   const handleLogout = () => {
-      logOut()
-          .then(() => { })
-          .catch(err => console.log(err))
-  }
+    logOut()
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
 
   const menuItems = (
     <React.Fragment>
@@ -23,16 +22,18 @@ const Navbar = () => {
       <li>
         <Link to="/dashboard">Dashboard</Link>
       </li>
-      
-        {user?.uid ?
-            <>
-                <li onClick={handleLogout}><Link>Logout</Link></li>
-            </>
 
-            :
-
-            <li><Link to='/login'>Login</Link></li>
-        }
+      {user?.uid ? (
+        <>
+          <li onClick={handleLogout}>
+            <Link>Logout</Link>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </React.Fragment>
   );
 
@@ -59,7 +60,7 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 capitalize"
+              className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-black rounded-box w-52 capitalize"
             >
               {menuItems}
             </ul>
@@ -74,7 +75,7 @@ const Navbar = () => {
         <label
           htmlFor="my-drawer-2"
           tabIndex={0}
-          className="btn btn-ghost lg:hidden"
+          className="btn btn-ghost lg:hidden md:hidden"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
