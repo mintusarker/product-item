@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
   //   const [items, setItems] = useState([]);
@@ -11,6 +12,8 @@ const AllProducts = () => {
   //       .then((res) => res.json())
   //       .then((data) => setItems(data));
   //   }, []);
+
+
   const { data: items = [], refetch } = useQuery({
     queryKey: ["allBookings"],
     queryFn: async () => {
@@ -66,12 +69,12 @@ const AllProducts = () => {
                 </td>
                 <td>{item?.brand}</td>
                 <td>{item?.price} tk</td>
-                <td className="w-56"> {item?.description} tk</td>
+                <td className="w-56"> {item?.description}</td>
                 <div>
-                  <button className="btn btn-sm m-4 btn-error">Edit</button>
+                <Link to={`/dashboard/update/${item?._id}`}><button className="btn btn-error btn-sm px-5">Edit</button></Link>
                   <button
                     onClick={() => handleProductRemove(item?._id)}
-                    className="btn btn-sm m-4 btn-warning"
+                    className="btn btn-sm m-4 px-5 btn-warning"
                   >
                     Delete
                   </button>

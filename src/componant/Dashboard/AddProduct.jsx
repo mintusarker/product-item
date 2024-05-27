@@ -88,7 +88,7 @@ const AddProduct = () => {
 
                 <div className="form-control w-full max-w-xs">
                     <label className="label"><span className="label-text">Image Url</span></label>
-                    <input type="text" className="input input-bordered w-full max-w-xs" {...register("image", {
+                    <textarea type="text" className="input input-bordered w-full max-w-xs" {...register("image", {
                         required: "Photo is required"
                     })} />
                     {errors.image && <p className='text-red-600'>{errors.image.message}</p>}
