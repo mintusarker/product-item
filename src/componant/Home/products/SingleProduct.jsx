@@ -1,6 +1,11 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 
 const SingleProduct = ({product}) => {
+
+  const handlePayment = () => {
+    toast.error("Sorry no implement payment method right now", {duration: 1000});
+  };
     return (
         <div className="card card-compact bg-base-100 shadow-xl">
           <figure>
@@ -15,7 +20,7 @@ const SingleProduct = ({product}) => {
             <p>Price:{product?.price}</p>
             <p>{product?.description.slice(0,100)}....</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
+              <button onClick={handlePayment} className="btn btn-primary">Buy Now</button>
             </div>
           </div>
         </div>

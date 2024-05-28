@@ -2,16 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import ConfirmModal from "./ConfirmModal";
 
 const AllProducts = () => {
-  //   const [items, setItems] = useState([]);
-  //   //   console.log(items);
+  const [showModal, setShowModal] = useState(false);
 
-  //   useEffect(() => {
-  //     fetch(`http://localhost:5000/items`)
-  //       .then((res) => res.json())
-  //       .then((data) => setItems(data));
-  //   }, []);
+  const [itemData, setItemData] = useState();
+  // console.log(itemData);
 
   const { data: items = [], refetch } = useQuery({
     queryKey: ["allBookings"],
@@ -30,9 +27,16 @@ const AllProducts = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        setShowModal(false);
         toast.success("Product deleted");
         refetch();
       });
+  };
+
+  //modal popup
+  const showModalHandle = (item) => {
+    setShowModal(true);
+    setItemData(item)
   };
 
   return (
@@ -71,7 +75,6 @@ const AllProducts = () => {
                 </td>
                 <td>{item?.brand}</td>
                 <td>{item?.price} tk</td>
-                {/* <td className="w-56"> {item?.description}</td> */}
                 <td>
                   <Link to={`/dashboard/detail/${item?._id}`}>
                     <button className="btn btn-accent btn-sm">Detail</button>
@@ -85,7 +88,10 @@ const AllProducts = () => {
                       </button>
                     </Link>
                     <button
-                      onClick={() => handleProductRemove(item?._id)}
+                      onClick={() => showModalHandle(item)}
+                    
+                      
+                      // onClick={() => handleProductRemove(item?._id)}
                       className="btn btn-sm m-4 px-5 btn-warning"
                     >
                       Delete
@@ -98,6 +104,16 @@ const AllProducts = () => {
           </tbody>
         </table>
       </div>
+
+      {showModal && (
+        <ConfirmModal
+          handleProductRemove={handleProductRemove}
+          setShowModal={setShowModal}
+          itemData={itemData}
+          message={`Are you sure want to delete ?`}
+          title={`If you delete ${itemData?.title}, It cannot be recoverable.`}
+        ></ConfirmModal>
+      )}
     </div>
   );
 };

@@ -37,6 +37,7 @@ const UpdateProduct = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
+          alert('Are you sure want to update ?')
           toast.success("product updated");
           navigate("/dashboard/All_products");
           console.log(data);

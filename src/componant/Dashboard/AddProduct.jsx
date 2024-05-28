@@ -12,6 +12,7 @@ const AddProduct = () => {
   } = useForm();
   const navigate = useNavigate();
 
+ //add product
   const handleAddProduct = (data) => {
     const product = {
       title: data.product,
@@ -33,7 +34,7 @@ const AddProduct = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-
+        alert('Are you sure want to add new product ?')
         toast.success("Product added successfully");
         reset();
         navigate("/dashboard/All_products");
@@ -42,7 +43,7 @@ const AddProduct = () => {
 
   return (
     <div className="px-40">
-      <h2 className="text-2xl mb-6">Add A Product</h2>
+      <h2 className="text-2xl mb-3">Add A Product</h2>
 
       <form className="" onSubmit={handleSubmit(handleAddProduct)}>
         <div className="form-control w-full">
@@ -50,6 +51,7 @@ const AddProduct = () => {
             <span className="label-text">Product Name</span>
           </label>
           <input
+            placeholder="Product Name"
             type="text"
             className="input input-bordered w-full max-w-xs"
             {...register("product", {
@@ -67,6 +69,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
+            placeholder="Brand Name"
             className="input input-bordered w-full max-w-xs"
             {...register("brand", {
               required: "Brand  name is required",
@@ -83,6 +86,7 @@ const AddProduct = () => {
           </label>
           <input
             type="text"
+            placeholder="Price Name"
             className="input input-bordered w-full max-w-xs"
             {...register("price", {
               required: "Price is required",
@@ -99,7 +103,8 @@ const AddProduct = () => {
           </label>
           <textarea
             type="text"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Product Detail"
+            className="input input-bordered w-96 h-20 max-w-xs"
             {...register("detail", {
               required: "Description is required",
             })}
@@ -115,9 +120,10 @@ const AddProduct = () => {
           </label>
           <textarea
             type="text"
-            className="input input-bordered w-full max-w-xs"
+            placeholder="Image address url"
+            className="input input-bordered w-96 h-20 max-w-xs"
             {...register("image", {
-              required: "Photo is required",
+              required: "Image url is required",
             })}
           />
           {errors.image && (

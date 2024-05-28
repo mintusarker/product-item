@@ -20,7 +20,6 @@ const SignUp = () => {
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = useState("");
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -59,6 +58,7 @@ const SignUp = () => {
         const user = result.user;
         console.log(user);
         toast.success(`User login successfully`)
+        navigate('/')
       })
       .catch((err) => {
         console.log(err.message);

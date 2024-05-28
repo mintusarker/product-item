@@ -7,7 +7,7 @@ const Details = () => {
   // console.log(singleData[0].title);
 
   const handlePayment = () => {
-    toast.error("Sorry no implement payment method right now");
+    toast.error("Sorry no implement payment method right now", {duration: 1000});
   };
 
   return (
